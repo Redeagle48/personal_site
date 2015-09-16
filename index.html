@@ -2,26 +2,27 @@
 <html lang="en">
 
 <head>
+  <!-- title -->
     <title>António Pedro Pereira - Information Systems and Computer Engineer</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="António Pedro Pereira - Software Engineer" />
     <meta name="keywords" content="Software Engineer, OutSystems, Information Systems, SystemsGroup, Técnico Lisboa, SINFO" />
     <meta name="author" content="António Pereira" />
     <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.poptrox.min.js"></script>
-    <script src="js/skel.min.js"></script>
-    <script src="js/init.js"></script>
-    <script src="parsley.min.js"></script>
+    <script src="public/assets/src/js/jquery.min.js"></script>
+    <script src="public/assets/src/js/jquery.poptrox.min.js"></script>
+    <script src="public/assets/src/js/skel.min.js"></script>
+    <script src="public/assets/src/js/init.js"></script>
+    <script src="public/assets/src/js/parsley.min.js"></script>
     <noscript>
-        <link rel="stylesheet" href="css/skel-noscript.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/parsley-style.css" />
+        <link rel="stylesheet" href="public/assets/src/css/skel-noscript.css" />
+        <link rel="stylesheet" href="public/assets/src/css/style.css" />
+        <link rel="stylesheet" href="public/assets/src/css/parsley-style.css" />
     </noscript>
     <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-    
+
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-       
+
 </head>
 
 <body>
@@ -100,52 +101,52 @@
 
             <!--
 						 Lightbox Gallery
-						 
+
 						 Powered by poptrox. Full docs here: https://github.com/n33/jquery.poptrox
             -->
             <div class="container small gallery">
                 <div class="row flush images">
                     <div class="12u">
-                        <a href="links.php?link=www.outsystems.com" data-poptrox="ignore" class="image full l">
-                            <img src="images/thumbs/OutSystems_Logo.jpg" title="OutSystems - www.outsystems.com" alt="OutSystems"/>
+                        <a href="public/assets/src/scripts/links.php?link=www.outsystems.com" data-poptrox="ignore" class="image full l">
+                            <img src="public/assets/src/images/thumbs/OutSystems_Logo.jpg" title="OutSystems - www.outsystems.com" alt="OutSystems"/>
                         </a>
                     </div>
                 </div>
                 <div class="row flush images">
                     <div class="6u">
-                        <a href="links.php?link=www.tecnico.ulisboa.pt" data-poptrox="ignore" class="image full l">
-                            <img src="images/thumbs/IST_Logo.png" title="IST - www.tecnico.ulisboa.pt" alt="Instituto Superior Técnico"/>
+                        <a href="public/assets/src/scripts/links.php?link=www.tecnico.ulisboa.pt" data-poptrox="ignore" class="image full l">
+                            <img src="public/assets/src/images/thumbs/IST_Logo.png" title="IST - www.tecnico.ulisboa.pt" alt="Instituto Superior Técnico"/>
                         </a>
                     </div>
-                    
+
                     <div class="6u">
-                        <a href="links.php?link=www.systems-group.org" data-poptrox="ignore" class="image full r">
-                            <img src="images/thumbs/SG_Logo.png" title="SystemsGroup - www.systems-group.org" alt="SystemsGroup" />
+                        <a href="public/assets/src/scripts/links.php?link=www.systems-group.org" data-poptrox="ignore" class="image full r">
+                            <img src="public/assets/src/images/thumbs/SG_Logo.png" title="SystemsGroup - www.systems-group.org" alt="SystemsGroup" />
                         </a>
                     </div>
-                    
+
                 </div>
-                
+
                 <div class="row flush images">
                     <div class="6u">
-                        <a href="links.php?link=lage2.tecnico.ulisboa.pt/" data-poptrox="ignore" class="image full l">
-                            <img src="images/thumbs/LAGE2_Logo.png" title="LAGE2 - www.lage2.tecnico.ulisboa.pt" alt="Lage2" />
+                        <a href="public/assets/src/scripts/links.php?link=lage2.tecnico.ulisboa.pt/" data-poptrox="ignore" class="image full l">
+                            <img src="public/assets/src/images/thumbs/LAGE2_Logo.png" title="LAGE2 - www.lage2.tecnico.ulisboa.pt" alt="Lage2" />
                         </a>
                     </div>
-                    
+
                     <div class="6u">
-                        <a href="links.php?link=www.sinfo.org" data-poptrox="ignore" class="image full r">
-                            <img src="images/thumbs/SINFO_Logo.png" title="SINFO - www.sinfo.org" alt="Sinfo" />
+                        <a href="public/assets/src/scripts/links.php?link=www.sinfo.org" data-poptrox="ignore" class="image full r">
+                            <img src="public/assets/src/images/thumbs/SINFO_Logo.png" title="SINFO - www.sinfo.org" alt="Sinfo" />
                         </a>
                     </div>
-                
-                    
+
+
                 </div>
-                
+
             </div>
 
         </div>
-        
+
     </section>
 
     <!-- Contact -->
@@ -159,19 +160,19 @@
 
                 <!--
 							 Contact Form
-							 
+
 							 To get this working, place a script on your server to receive the form data, then
 							 point the "action" attribute to it (eg. action="http://mydomain.tld/mail.php").
 							 More on how it all works here: http://www.1stwebdesigner.com/tutorials/custom-php-contact-forms/
 						-->
-					
+
                 <form data-parsley-validate method="post" action="mail.php">
                     <div class="row half">
                         <div class="6u">
                             <input type="text" name="name" required placeholder="Your Name" />
                         </div>
                         <div class="6u">
-                            <input type="email" name="email" required data-parsley-trigger="change" placeholder="Your Email address" />    
+                            <input type="email" name="email" required data-parsley-trigger="change" placeholder="Your Email address" />
                         </div>
                     </div>
                     <div class="row half">
@@ -199,17 +200,17 @@
 
         <!--
 				     Social Icons
-				     
+
 				     Use anything from here: http://fortawesome.github.io/Font-Awesome/cheatsheet/)
 				-->
         <ul class="actions">
-            
+
             <li><a href="https://www.facebook.com/AntonioPedroRSMPereira" class="fa solo fa-facebook" target="_blank"><span>Facebook</span></a>
             </li>
             <li><a href="https://plus.google.com/+AntónioPereira_at_Gplus" rel="publisher" class="fa solo fa-google-plus" target="_blank"><span>Google+</span></a>
             <li><a href="https://twitter.com/Redeagle48" class="fa solo fa-twitter" target="_blank"><span>Twitter</span></a>
             </li>
-            
+
         <li><a href="http://pt.linkedin.com/in/antonioppereira" class="fa solo fa-linkedin-square" target="_blank"><span>LinkedIn</span></a>
             </li>
         <li><a href="https://github.com/Redeagle48" class="fa solo fa-github-alt" target="_blank"><span>Github</span></a>
@@ -225,7 +226,7 @@
         </ul>
 
     </footer>
-    
+
 <!-- Piwik -->
 
 <script type="text/javascript">
