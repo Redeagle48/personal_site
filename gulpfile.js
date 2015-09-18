@@ -1,4 +1,4 @@
-var gulp = require('gulp');
+var gulp = require('gulp-help')(require('gulp'));
 var plumbler = require('gulp-plumber');
 var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
@@ -11,10 +11,14 @@ var rename = require('gulp-rename');
 
 var reload = browserSync.reload;
 
+var ftpData = require('./ftp-config');
+
+var w3cjs = require('gulp-w3cjs');
+
 //////////////////////////////////
 // Compress images
 //////////////////////////////////
-gulp.task('compress-images', function() {
+gulp.task('compress-images', 'Compress Images', function() {
   gulp.src('public/assets/src/images/**')
     .pipe(imagemin())
     .pipe(gulp.dest('build/public/images'));
@@ -23,22 +27,24 @@ gulp.task('compress-images', function() {
 //////////////////////////////////
 // Minify JavaScript files
 //////////////////////////////////
-gulp.task('minify-js', function() {
+gulp.task('minify-js', 'Move javascript to the build folder, replace paths and minify them', function() {
   gulp.src('public/assets/src/js/*.js')
-    .pipe(plumbler())
-    .pipe(replace('public/assets/src', 'public'))
-    /*
+      .pipe(plumbler())
+      .pipe(uglify())
+      .pipe(replace('public/assets/src', 'public'))
+/*
         .pipe(rename({
-          suffix: '.min',
+          //suffix: '.min',
+          extname: ".min.js"
         }))
-    */
+*/
     .pipe(gulp.dest('build/public/js'));
 });
 
 //////////////////////////////////
 // Handle CSS folder
 //////////////////////////////////
-gulp.task('minify-css', function() {
+gulp.task('minify-css', 'Move css to the build folder and replace paths', function() {
   gulp.src('public/assets/src/css/**')
     .pipe(plumbler())
     .pipe(replace('public/assets/src', 'public'))
@@ -48,7 +54,7 @@ gulp.task('minify-css', function() {
 //////////////////////////////////
 // Handle Font folder
 //////////////////////////////////
-gulp.task('minify-font', function() {
+gulp.task('minify-font', 'Move fonts to the build folder', function() {
   gulp.src('public/assets/src/font/**')
     .pipe(plumbler())
     .pipe(gulp.dest('build/public/font'));
@@ -57,7 +63,7 @@ gulp.task('minify-font', function() {
 //////////////////////////////////
 // Handle scripts folder
 //////////////////////////////////
-gulp.task('minify-scripts', function() {
+gulp.task('minify-scripts', 'Move scripts to the build folder', function() {
   gulp.src('public/assets/src/scripts/**')
     .pipe(plumbler())
     .pipe(gulp.dest('build/public/scripts'));
@@ -66,7 +72,7 @@ gulp.task('minify-scripts', function() {
 //////////////////////////////////
 // Handle index HTML file
 //////////////////////////////////
-gulp.task('copy-html', function() {
+gulp.task('copy-html', 'Copy index.html to the build folder and replace paths', function() {
   gulp.src('index.html')
     .pipe(replace('public/assets/src', 'public'))
     .pipe(gulp.dest('build'));
@@ -75,7 +81,7 @@ gulp.task('copy-html', function() {
 //////////////////////////////////
 // Handle metadata files
 //////////////////////////////////
-gulp.task('copy-meta', function() {
+gulp.task('copy-meta', 'Copy meta data to the build folder', function() {
   gulp.src(['sitemap.xml', 'sitemap.html', 'robots.txt', 'google*.html', 'favicon.png'])
     .pipe(gulp.dest('build'));
 });
@@ -87,13 +93,13 @@ gulp.task('build', ['copy-html', 'copy-meta', 'minify-css', 'minify-font', 'mini
 //////////////////////////////////
 // Watch html files
 //////////////////////////////////
-gulp.task('serve', function() {
+gulp.task('serve', 'Browser live reload while developing', function() {
 
   // Serve files from the root of this project
   browserSync.init({
     server: {
-      baseDir: './',
-    },
+      baseDir: './'
+    }
   });
 
   gulp.watch('index.html').on('change', browserSync.reload);
@@ -107,9 +113,9 @@ var clean = require('gulp-clean');
 //////////////////////////////////
 // Clean build files
 //////////////////////////////////
-gulp.task('clean', function() {
+gulp.task('clean', 'Clean build folder and files', function() {
   return gulp.src('build', {
-      read: false,
+      read: false
     })
     .pipe(clean());
 });
@@ -117,32 +123,46 @@ gulp.task('clean', function() {
 //////////////////////////////////
 // Deploy to the server
 // //////////////////////////////////
-gulp.task('deploy', function() {
+gulp.task('deploy', 'Deploy the build files to the server', function() {
 
   var conn = ftp.create({
-    host: 'mywebsite.tld',
-    user: 'me',
-    password: 'mypass',
+    host: ftpData.host,
+    user: ftpData.user,
+    password: ftpData.password,
     parallel: 10,
     log: gutil.log
   });
 
   var globs = [
-    'src/**',
-    'css/**',
-    'js/**',
-    'fonts/**',
-    'index.html'
+    'public/scripts/**',
+    'public/css/**',
+    'public/js/**',
+    'public/fonts/**',
+    'public/images/**',
+    'index.html',
+    'sitemap.html',
+    'sitemap.xml',
+    'robots.txt',
+    'favicon.png',
+    'google*.html'
   ];
 
   // using base = '.' will transfer everything to /public_html correctly
   // turn off buffering in gulp.src for best performance
 
   return gulp.src(globs, {
-      base: '.',
+      base: './build',
       buffer: false
     })
-    .pipe(conn.newer('/public_html')) // only upload newer files
-    .pipe(conn.dest('/public_html'));
+    .pipe(conn.newer('/public_html/test_site/')) // only upload newer files
+    .pipe(conn.dest('/public_html/test_site/'));
 
+});
+
+//////////////////////////////////
+// Verify html correctness according to w3cjs
+// //////////////////////////////////
+gulp.task('verify-html', 'Verify html correctness according to w3cjs', function() {
+  gulp.src('src/index.html')
+    .pipe(w3cjs());
 });
